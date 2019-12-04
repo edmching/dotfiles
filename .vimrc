@@ -1,8 +1,20 @@
 syntax enable
 
+" Change cursor shape when in insert mode(term only) 
+"----------------------------------------
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" optional reset cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+"--------------------------------------
+
 let mapleader=","
 
-colorscheme slate
+colorscheme default
 
 "Tabs and spaces
 filetype indent on
@@ -51,10 +63,10 @@ set visualbell
 "if visualbell is set vim will neither flash nor beep
 set t_vb=
 
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
+"set guioptions-=m  "remove menu bar
+"set guioptions-=T  "remove toolbar
+"set guioptions-=r  "remove right-hand scroll bar
+"set guioptions-=L  "remove left-hand scroll bar
 set t_Co=256
-hi Normal guifg=grey guibg=black
+"hi Normal guifg=grey guibg=black
 
