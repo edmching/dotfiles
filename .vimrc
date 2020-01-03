@@ -42,7 +42,7 @@ set number
 nnoremap gV `[v`]
 
 set nowrap
-set cursorline
+"set cursorline
 
 " Use case insesitive search, except when using capital letters
 set ignorecase
