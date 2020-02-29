@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/Downloads/gcc-arm-none-eabi/bin:/home/edm/.gem/ruby/2.6.0/bin
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/Downloads/gcc-arm-none-eabi/bin:/home/edm/.gem/ruby/2.6.0/bin:/home/edm/Desktop:/home/edm/.gem/ruby/2.7.0/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/edm/.oh-my-zsh"
@@ -103,9 +103,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias quartus="quartus --64bit"
+alias win10="virt-viewer --hotkeys=release-cursor=ctrl+alt --connect=qemu:///system --domain-name win10 & disown"
+
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     prompt_segment black default "%(!.%{%F{yellow}%}.)$USER@$HOST"
-  fi
+  fi 
 }
-
