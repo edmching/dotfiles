@@ -4,22 +4,7 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
-# set default desktop layout (default is tiling)
-# workspace_layout tabbed <stacking|tabbed>
-
-# Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 3
-default_floating_border none
-
-# Hide borders
-hide_edge_borders none
-
-# change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 3
-bindsym $mod+n border normal
-
-#  for window titles. Will also be used by the bar unless a different font
+#for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font xft:URWGothic-Book 11
 font xft:monospace 11
@@ -27,6 +12,85 @@ font xft:monospace 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
+# set default desktop layout (default is tiling)
+# workspace_layout tabbed <stacking|tabbed>
+
+#######################################################
+# Border config
+##################################################
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border pixel 2
+default_floating_border none
+
+# Hide borders
+hide_edge_borders none
+
+# change borders
+bindsym $mod+u border none
+bindsym $mod+y border pixel 2
+bindsym $mod+n border normal
+#####################################################
+
+
+################################################################################################
+## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
+################################################################################################
+
+exec --no-startup-id volumeicon
+#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#exec --no-startup-id pulseaudio
+#exec --no-startup-id pa-applet
+bindsym $mod+Ctrl+m exec pavucontrol
+
+################################################################################################
+
+
+########################################################################
+# Autostart applications
+########################################################################
+# For alternative hdpi
+#exec xrandr --output eDP1 --scale 1.33x1.33 --panning 3405x1916
+exec xrandr --dpi 144 #use without GDK_SCALE = 2
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nitrogen --restore; sleep 1;
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+#exec --no-startup-id manjaro-hello
+#exec --no-startup-id blueman-applet
+#exec_always --no-startup-id sbxkb
+#exec --no-startup-id start_conky_maia #default conky
+#exec --no-startup-id start_conky_green
+#exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id light-locker
+exec --no-startup-id xautolock -time 10 -locker light-locker-command -l
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+exec --no-startup-id picom -b #picom is compton
+exec --no-startup-id spotify
+exec --no-startup-id thunderbird
+exec --no-startup-id files
+#exec --no-startup-id tint2
+#exec --no-startup-id terminal -e 'fusuma -d'
+
+#Autostart scratchpad terminal & ranger
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 1600 900
+for_window [instance="dropdown"] move scratchpad 
+exec --no-startup-id urxvt -name dropdown
+bindsym $mod+t [instance="dropdown"] scratchpad show, move position center
+
+for_window [instance="ranger"] floating enable
+for_window [instance="ranger"] resize set 1600 900
+for_window [instance="ranger"] move scratchpad 
+exec --no-startup-id urxvt -e ranger -name ranger
+bindsym $mod+r [instance="ranger"] scratchpad show, move position center
+#############################################################################
+
+##############################################
+# Start Applications with shortcuts
+###############################################
 # start a terminal
 bindsym $mod+Return exec terminal
 
@@ -35,56 +99,38 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 #bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
-
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
-
-# Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
-
-# Start Applications
-#bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec firefox
-bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F5 exec terminal -e 'mocp'
-bindsym $mod+t exec --no-startup-id pkill picom
-bindsym $mod+Ctrl+t exec --no-startup-id picom -b
+bindsym $mod+p exec --no-startup-id pkill picom
+bindsym $mod+Ctrl+p exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-bindsym $mod+Shift+p exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# focus_follows_mouse no
+# Unused
+#bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+#bindsym $mod+F2 exec firefox
+#bindsym $mod+F3 exec pcmanfm
+#bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+#bindsym $mod+F5 exec terminal -e 'mocp'
+#bindsym $mod+Shift+p exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+#bindsym $mod+r exec terminal -e ranger
+##############################################
+
+#############################################
+# Change Focus Config
+#############################################
+focus_follows_mouse yes
 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -93,13 +139,20 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
+
+# alternatively, you can use the cursor keys:
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
+########################################################
 
 # workspace back and forth (with/without active container)
-workspace_auto_back_and_forth yes
+#workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
@@ -134,6 +187,9 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
+bindsym $mod+c [instance="(?)clementine"] scratchpad show, move position center
+bindsym $mod+g [instance="org.gnome.Nautilus"] scratchpad show, move position center
+bindsym $mod+m [instance="mupdf"] scratchpad show, move position center
 
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
@@ -193,8 +249,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 # Open applications on specific workspaces
 assign [class="Thunderbird"] $ws9
 for_window [class="(?i)spotify"] move window to workspace $ws10
-# assign [class="Pale moon"] $ws2
-# assign [class="Skype"] $ws5
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 3
@@ -213,22 +267,26 @@ for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
+#for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move down $height px
 for_window [class="(?i)pcmanfm"] floating enable, resize set 1600 900, move position center
 for_window [instance="(?i)Places"] floating enable, resize set 1440 900, move position center
 for_window [class="vlc"] floating enable, resize set 1440 900, move position center
-for_window [class="VirtualBox Machine"] floating enable, resize set 1600 1200, move position center
+#for_window [class="VirtualBox Machine"] floating enable, resize set 1600 1200, move position center, border normal
+for_window [class="VirtualBox Manager"] floating enable, resize set 1600 1200, move position center, border normal
+for_window [class="(?i)blueman-manager"] floating enable, resize set 1600 1200, move position center 
+for_window [class="(?i)clementine"] floating enable, resize set 1600 900, move position center 
+for_window [class="(?i)gnome-terminal"] floating enable, move position center
+for_window [class="(?i)org.gnome.Nautilus"] floating enable, resize set 1600 900, move position center
+
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -259,55 +317,37 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-# Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # exit resize mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+## Resize window (you can also use the mouse for that)
+# Resizing by 5
+bindsym $mod+Shift+Right resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+Up resize grow height 5 px or 5 ppt
+bindsym $mod+Shift+Down resize shrink height 5 px or 5 ppt
+bindsym $mod+Shift+Left resize grow width 5 px or 5 ppt
+#bindsym $mod+r mode "resize"
+#mode "resize" {
+#        # These bindings trigger as soon as you enter the resize mode
+#        # Pressing left will shrink the window’s width.
+#        # Pressing right will grow the window’s width.
+#        # Pressing up will shrink the window’s height.
+#        # Pressing down will grow the window’s height.
+#        bindsym l resize shrink width 5 px or 5 ppt
+#        bindsym k resize grow height 5 px or 5 ppt
+#        bindsym j resize shrink height 5 px or 5 ppt
+#        bindsym h resize grow width 5 px or 5 ppt
+#
+#        # same bindings, but for the arrow keys
+#        bindsym Right resize shrink width 10 px or 10 ppt
+#        bindsym Up resize grow height 10 px or 10 ppt
+#        bindsym Down resize shrink height 10 px or 10 ppt
+#        bindsym Left resize grow width 10 px or 10 ppt
+#
+#        # exit resize mode: Enter or Escape
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
 
 # Lock screen
 #bindsym $mod+9 exec --no-startup-id blurlock
-
-# Autostart applications
-#exec xrandr --output eDP1 --scale 1.33x1.33 --panning 3405x1916
-exec xrandr --dpi 144 #use without GDK_SCALE = 2
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1;
-#exec --no-startup-id manjaro-hello
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
-#exec --no-startup-id blueman-applet
-#exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
-#exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
-exec --no-startup-id picom -b #picom is compton
-exec --no-startup-id spotify
-exec --no-startup-id tint2
-exec --no-startup-id thunderbird
-
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -399,7 +439,7 @@ gaps outer -2
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
 # gaps inner all set 10
-#gaps outer all plus 5
+# gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
 #smart_gaps on
@@ -444,3 +484,25 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+## Manual management of external displays
+# TODO: 1080p scaling is to big
+# Set the shortcuts and what they do
+set $mode_display Ext Screen (a) HDMI ABOVE, (r) HDMI RIGHT, (x) HDMI OFF
+mode "$mode_display" {
+    bindsym a exec --no-startup-id xrandr --output HDMI1 --auto --above eDP1
+    bindsym r exec --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1
+    bindsym x exec --no-startup-id xrandr --output HDMI1 --auto --off
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# Declare here the shortcut to bring the display selection menu
+bindsym $mod+x mode "$mode_display"
+
+# Unused
+# Screen brightness controls
+#bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+#bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+
