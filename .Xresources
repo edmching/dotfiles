@@ -31,7 +31,7 @@ rofi.color-window: argb:ffffffff
 
 ! special
 URxvt.foreground: #ffffff
-URxvt.background: [80]#000000
+URxvt.background: [85]#000000
 *.cursorColor: #afbfbf
 Xcursor.theme: xcursor-breeze
 Xcursor.size: 32
@@ -261,8 +261,8 @@ URxvt.keysym.Shift-Control-Down:  \033[1;6B
 ! URxvt*modifier:                   modifier
 ! URxvt*cutchars:                   string
 ! URxvt*answerbackString:           string
-! URxvt*secondaryScreen:            boolean
-! URxvt*secondaryScroll:            boolean
+URxvt*secondaryScreen:              1
+URxvt*secondaryScroll:            0 
 ! URxvt*perl-lib:                   string
 ! URxvt*perl-eval:                  perl-eval
 ! URxvt*perl-ext-common:            string
