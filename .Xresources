@@ -6,27 +6,6 @@ Xft.autohint:  false
 Xft.hintstyle: hintsfull
 Xft.lcdfilter: lcddefault
 
-rofi.dpi: 144
-rofi.font: Anonymous Pro, Regular, 12
-
-
-! manjaro green/grey color scheme
-!rofi.color-enabled: true
-!           State: ‘bg’,          ‘fg’,    ‘altbg’,       ‘hlbg’,        hlfg
-!rofi.color-window: argb:cc252936, #2BC1A4, #2BC1A4
-!rofi.color-normal: argb:00252936, #ffffff, argb:00252936, argb:009575cd, #2BC1A4
-!rofi.color-active: argb:00252936, #252936, argb:00252936, argb:009575cd, #ffc000
-!rofi.color-urgent: argb:00252936, #ff0000, argb:00252936, argb:00252936, #ff0000
-rofi.separator-style: solid
-rofi.lines: 14
-
-!! white/red color scheme
-rofi.color-enabled: true
-rofi.color-normal: argb:ffffffff , #353535 , argb:ffffffff , #ff372c , #1b2b34
-rofi.color-urgent: argb:ffffffff , #ff372c , argb:ffffffff , #ff372c , #1b2b34
-rofi.color-active: argb:ffffffff , #6699cc , argb:ffffffff , #6699cc , #1b2b34
-rofi.color-window: argb:ffffffff
-
 !! Colorscheme
 
 ! special
@@ -71,7 +50,7 @@ Xcursor.size: 32
 *.color7: #bfbaac
 *.color15: #fdf6e3
 
-URxvt*font:    xft:DejaVu Sans Mono for Powerline:size=11
+URxvt*font:    xft:DejaVu Sans Mono for Powerline:size=12
 URxvt.depth:                      32
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
@@ -310,3 +289,24 @@ URxvt*secondaryScroll:            0
 ! -xos4-terminus-bold-r-normal--24-240-72-72-c-120-iso10646-1
 ! -xos4-terminus-bold-r-normal--28-280-72-72-c-140-iso10646-1
 ! -xos4-terminus-bold-r-normal--32-320-72-72-c-160-iso10646-1
+
+!rofi.dpi: 144
+!rofi.font: Anonymous Pro, Regular, 14
+
+
+! manjaro green/grey color scheme
+!rofi.color-enabled: true
+!           State: ‘bg’,          ‘fg’,    ‘altbg’,       ‘hlbg’,        hlfg
+!rofi.color-window: argb:cc252936, #2BC1A4, #2BC1A4
+!rofi.color-normal: argb:00252936, #ffffff, argb:00252936, argb:009575cd, #2BC1A4
+!rofi.color-active: argb:00252936, #252936, argb:00252936, argb:009575cd, #ffc000
+!rofi.color-urgent: argb:00252936, #ff0000, argb:00252936, argb:00252936, #ff0000
+!rofi.separator-style: solid
+!rofi.lines: 14
+
+!! white/red color scheme
+!rofi.color-enabled: true
+!rofi.color-normal: argb:ffffffff , #353535 , argb:ffffffff , #ff372c , #1b2b34
+!rofi.color-urgent: argb:ffffffff , #ff372c , argb:ffffffff , #ff372c , #1b2b34
+!rofi.color-active: argb:ffffffff , #6699cc , argb:ffffffff , #6699cc , #1b2b34
+!rofi.color-window: argb:ffffffff
