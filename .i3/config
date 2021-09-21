@@ -7,7 +7,7 @@ set $mod Mod4
 #for window titles. Will also be used by the Bar unless a different font
 # is used in the bar {} block below.
 #font xft:URWGothic-Book 11
-font xft:monospace 12
+font xft:monospace 11
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -19,7 +19,7 @@ floating_modifier $mod
 # Border config
 ##################################################
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 2
+default_border none
 default_floating_border none
 
 # Hide borders
@@ -51,9 +51,10 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # Autostart applications
 ########################################################################
 # For alternative hdpi
-#exec xrandr --output eDP1 --scale 1.33x1.33 --panning 3405x1916
-exec xrandr --dpi 144 #use without GDK_SCALE = 2
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 exec --no-startup-id nitrogen --restore; sleep 1;
+#exec xrandr --output eDP1 --scale 1.4x1.4 --dpi 192
+#exec xrandr --output eDP1 --mode 2560x1440
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nitrogen --restore; sleep 1;
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 #exec --no-startup-id pamac-tray
@@ -90,7 +91,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 #bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show combi
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -104,7 +105,7 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s #screen capt
 
 # Unused
 #bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-#bindsym $mod+F2 exec firefox
+bindsym $mod+a exec firefox
 #bindsym $mod+F3 exec pcmanfm
 #bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 #bindsym $mod+F5 exec terminal -e 'mocp'
@@ -167,18 +168,18 @@ bindsym $mod+Shift+minus move scratchpad
 #Autostart scratchpad terminal & ranger
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 1600 900
-for_window [instance="dropdown"] move scratchpad 
+for_window [instance="dropdown"] move scratchpad, border pixel 2
 exec --no-startup-id urxvt -name dropdown
-bindsym $mod+t [instance="dropdown"] scratchpad show, move position center
+bindsym $mod+t [instance="dropdown"] scratchpad show, move position center, sticky enable
 
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
-bindsym $mod+c [instance="(?)clementine"] scratchpad show, move position center
-bindsym $mod+g [instance="org.gnome.Nautilus"] scratchpad show, move position center
+bindsym $mod+c [instance="(?)clementine"] scratchpad show, move position center, sticky enable
+bindsym $mod+g [instance="org.gnome.Nautilus"] scratchpad show, move position center, sticky enable
 bindsym $mod+m [instance="mupdf"] scratchpad show, move position center
-bindsym $mod+r [instance="(?i)gnome-terminal"] scratchpad show, move position center
+bindsym $mod+r [instance="(?i)gnome-terminal"] scratchpad show, move position center, sticky enable
 
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
@@ -241,40 +242,42 @@ for_window [class="Thunderbird"] move container to workspace $ws9
 for_window [class="(?i)spotify"] move container to workspace $ws10
 
 # Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 3
-for_window [class="calamares"] floating enable border normal
+for_window [title="alsamixer"] floating enable
+#for_window [class="calamares"] floating enable 
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="fpakman"] floating enable
-for_window [class="Galculator"] floating enable border pixel 3
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Galculator"] floating enable
+for_window [class="GParted"] floating enable, resize set 1600 900, move position center
+for_window [title="i3_help"] floating enable sticky enable
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable
 for_window [class="Manjaro-hello"] floating enable
 for_window [class="Manjaro Settings Manager"] floating enable
 for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable
+for_window [class="Nitrogen"] floating enable sticky enable, move position center
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="Pamac-manager"] floating enable, move position center
+for_window [class="Pavucontrol"] floating enable, move position center
+for_window [class="qt5ct"] floating enable sticky enable, move position center
+for_window [class="Qtconfig-qt4"] floating enable sticky enable, move position center
+for_window [class="Simple-scan"] floating enable, resize set 1600 900, move position center
+for_window [class="(?i)System-config-printer.py"] floating enable
+for_window [class="Timeset-gui"] floating enable, move position center
 for_window [class="Xfburn"] floating enable
 for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move down $height px
 for_window [class="(?i)pcmanfm"] floating enable, resize set 1600 900, move position center
 for_window [instance="(?i)Places"] floating enable, resize set 1440 900, move position center
 for_window [class="vlc"] floating enable, resize set 1600 900, move position center
-for_window [class="VirtualBox Manager"] floating enable, resize set 1600 1200, move position center, border normal
+for_window [class="VirtualBox Manager"] floating enable, resize set 1600 1200, move position center
 for_window [class="(?i)blueman-manager"] floating enable, resize set 1600 1200, move position center 
 for_window [class="(?i)clementine"] floating enable, resize set 1600 900, move position center 
-for_window [class="(?i)gnome-terminal"] floating enable, resize set 1600 900, move position center
+for_window [class="(?i)gnome-terminal"] floating enable, resize set 1600 900, move position center, border pixel 2
 for_window [class="(?i)org.gnome.Nautilus"] floating enable, resize set 1600 900, move position center
-for_window [class="(?i)xfce4-power-manager-settings"] floating enable move position center
+for_window [class="(?i)xfce4-power-manager-settings"] floating enable, move position center
+for_window [title="Choose an Image File"] floating enable, resize set 1600 900, move position center
+for_window [instance="urxvt"] border pixel 2
 
 
 # switch to workspace with urgent window automatically
@@ -371,15 +374,15 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command i3bar
+	i3bar_command i3bar --transparency 
 	status_command i3status
-    height 36
+    height 40
     position top
 	#position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 	tray_output primary
-    tray_padding 2
+    tray_padding 1
     #tray_output eDP1
 
 	bindsym button4 nop
@@ -389,7 +392,7 @@ bar {
 
     colors {
         #background #222D31
-        background #141c21AA
+        background #141c2100
         statusline #F9FAF9
         separator  #454947
 
@@ -425,11 +428,11 @@ bar {
 
 # Set inner/outer gaps
 gaps inner 16
-gaps outer 0
-gaps left -8
-gaps right -8
-gaps top -6
-gaps bottom -6
+gaps outer 2
+gaps left -2
+gaps right -2
+gaps top -2
+gaps bottom -2
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -437,7 +440,7 @@ gaps bottom -6
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-#smart_gaps inverse_outer
+smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
@@ -489,7 +492,7 @@ mode "$mode_display" {
     bindsym a exec --no-startup-id xrandr --output HDMI1 --auto --above eDP1
     bindsym l exec --no-startup-id xrandr --output HDMI1 --auto --left-of eDP1
     bindsym r exec --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1
-    bindsym x exec --no-startup-id xrandr --output HDMI1 --auto --off
+    bindsym x exec --no-startup-id xrandr --output HDMI1 --auto --off 
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
